@@ -1,0 +1,12 @@
+@import 'reset';
+
+@import 'variables';
+@import 'global';
+@import 'mixins';
+
+// pages
+@import '../Components/Nav/Nav.scss';
+@import '../Components/Footer/Footer.scss';
+@import '../Components/About/About.scss';
+@import '../Components/LandingPage/LandingPage.scss';
+@import '../Components/Profile/Profile.scss';
