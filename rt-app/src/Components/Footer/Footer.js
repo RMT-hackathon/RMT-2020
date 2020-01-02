@@ -3,7 +3,7 @@ import React from 'react';
 const Foot = () => {
     return (
         <div className={'footer'}>
-            <img src={'rt-app/src/img/footer_logo.svg'}/>
+            <img id={'footLogo'} src={'rt-app/src/img/footer_logo.svg'}/>
             <div className={'contact'}>
                 <h2>Contact</h2>
                 <h3>info@company.com</h3>
