@@ -1,16 +1,20 @@
 import React from 'react';
-import { BrowswerRouter, Route } from 'react-router-dom';
-// import footer
-// import nav
-// import LandingPage
-// import Profile
+import { BrowserRouter, Route } from 'react-router-dom';
+import Footer from './Components/Footer/Footer';
+import Nav from './Components/Nav/Nav';
+import LandingPage from './Components/LandingPage/LandingPage';
+import About from './Components/About/About';
+import Profile from './Components/Profile/Profile';
 
 
 export const Routes = () => {
     return (
-        <BrowswerRouter>
+        <BrowserRouter>
+            <Nav />
             <Route path="/" component={LandingPage} />
+            <Route exact path="/about" component={About} />
             <Route exact path="/profile" component={Profile} />
-        </BrowswerRouter>
+            <Footer />
+        </BrowserRouter>
     )
 }
