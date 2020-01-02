@@ -1,7 +1,12 @@
-
 import React from 'react';
 
+const Foot = () => {
+    return (
+        <div>
+            <img/>
 
-default export function Footer() {
-
+        </div>
+    )
 }
+
+export default Foot;
