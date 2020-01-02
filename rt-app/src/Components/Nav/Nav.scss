@@ -1,4 +1,15 @@
 nav {
     display: flex;
     flex-direction: row;
+    width: 100%;
+    background-color: $brand-blue;
+    a {
+        color: $blue-white;
+        text-decoration: none;
+    }
+    .btn {
+        background-color: $blue-white;
+        border-radius: 3px;
+        color: $brand-blue;
+    }
 }

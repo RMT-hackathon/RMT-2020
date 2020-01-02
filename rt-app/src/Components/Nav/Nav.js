@@ -1,17 +1,20 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-const Nav = () => {
+const Nav = props => {
     
-    const loggedIn = true;
-    const logout = () => {
+    useEffect(() => {
 
+    })
+    const [loggedIn, setLoggedIn] = useState(true);
+    const logout = () => {
+        setLoggedIn(false)
     }
     const signup = () => {
 
     }
     const login = () => {
-
+        setLoggedIn(true)
     }
     const links = [
         {
@@ -23,7 +26,8 @@ const Nav = () => {
             path: "/faq "
         }
     ]
-    
+    // console.log("props ", props);
+
     return (
         <nav>
             <div className="logo">
