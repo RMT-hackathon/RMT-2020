@@ -7,7 +7,7 @@ const Foot = () => {
             <div className={'contact'}>
                 <h2>Contact</h2>
                 <h3>info@company.com</h3>
-                <p>+1(999)999-999</p>
+                <p>+1(999)999-9999</p>
                 <div className={'social'}>
                     <img id={'icon'} src={'rt-app/img/icons/facebook.svg'}/>
                     <img id={'icon'} src={'rt-app/img/icons/twitter.svg'}/>
@@ -17,9 +17,9 @@ const Foot = () => {
             <div className={'footBar'}>
                 <p>Copyright 2019; All Rights Reserved</p>
                 <div className={'socialWhite'}>
-                    <img className={'icon'} src={'rt-app/img/icons/facebook.svg'}/>
-                    <img className={'icon'} src={'rt-app/img/icons/twitter.svg'}/>
-                    <img className={'icon'} src={'rt-app/img/icons/instagram.svg'}/>
+                    <img className={'icon'} src={'rt-app/img/icons/fb_white.svg'}/>
+                    <img className={'icon'} src={'rt-app/img/icons/tw_white.svg'}/>
+                    <img className={'icon'} src={'rt-app/img/icons/ig_white.svg'}/>
                 </div>
             </div>
         </div>
