@@ -1,15 +1,47 @@
 nav {
+    position: sticky;
     display: flex;
     flex-direction: row;
     width: 100%;
+    justify-content: space-around;
+    align-items: center;
     background-color: $brand-blue;
-    a {
-        color: $blue-white;
-        text-decoration: none;
+    font-size: 1.6rem;
+    .profile-img {
+        display: hidden;
+        width: 5rem;
+        height: 5rem;
+        @media (min-width: $mobile) {
+            display: block;
+        }
     }
-    .btn {
-        background-color: $blue-white;
-        border-radius: 3px;
-        color: $brand-blue;
+    .logo {
+        margin: 1.5rem 2.5rem;
+        height: 50%;
+        width: 50%;
     }
+    .right {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+
+        a {
+            color: $blue-white;
+            text-decoration: none;
+            margin: 0 1.5rem;
+            @media (min-width: $mobile) {
+                display: hidden;
+            }
+        }
+        .btn {
+            background-color: $blue-white;
+            border-radius: 3px;
+            color: $brand-blue;
+            padding: 1.5rem 2.5rem;
+            margin: 0 1.5rem;
+            cursor: pointer;
+        }
+    }
+    // .link
 }
