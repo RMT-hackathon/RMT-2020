@@ -1,38 +1,12 @@
 import React, { useState, useEffect } from 'react';
 // import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'react-strap';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 import footer_logo from '../../img/footer_logo.svg'
 
 const Nav = props => {
     
-    const [lFormState, setLFormState] = useState({
-        email: "",
-        password: ""
-    })
-
-    const [sFormState, setSFormState] = useState({
-        email: "",
-        password: "",
-        cPassword: "",
-        firstName: "",
-        
-
-    })
-
-    const [loggedIn, setLoggedIn] = useState(true);
-    const [lModal, setLModal] = useState(false);
-
-    const logout = () => {
-        setLoggedIn(false)
-    }
-    const signup = () => {
-
-    }
-    const login = () => {
-        // setLoggedIn(true)
-        setLModal(true)
-    }
     const links = [
         {
             name: "About",
@@ -43,7 +17,96 @@ const Nav = props => {
             path: "/faq "
         }
     ]
-    // console.log("props ", props);
+
+    const [formState, setFormState] = useState({
+        login: {
+            email: "",
+            password: ""
+        },
+        signup: {
+            email: "",
+            password: "",
+            cPassword: "",
+            firstName: "",
+            lastName: "",
+            phone: "",
+            userType: ""
+        }
+    })
+
+    const [loggedIn, setLoggedIn] = useState(false);
+    const [lModal, setLModal] = useState(false);
+    const [sModal, setSModal] = useState(false);
+
+    const logout = () => {
+        setLoggedIn(false)
+    }
+    const displaySignup = () => {
+        setLModal(false)
+        setSModal(true)
+    }
+    const signup = () => {
+        if (formState.signup.password === formState.signup.cPassword.cPassword) {
+
+            // axios.post(`url`, formState.signup)
+            setFormState({
+                login: {
+                    email: "",
+                    password: ""
+                },
+                signup: {
+                    email: "",
+                    password: "",
+                    cPassword: "",
+                    firstName: "",
+                    lastName: "",
+                    phone: "",
+                    userType: ""
+                }
+            })
+        } else {
+            return (<><p>Passwords do not match</p></>)
+        }
+    }
+    const displayLogin = () => {
+        setSModal(false)
+        setLModal(true)
+    }
+    const login = () => {
+        // setLoggedIn(true)
+        // axios.post(`url`, formState.login)
+        setFormState({
+            login: {
+                email: "",
+                password: ""
+            },
+            signup: {
+                email: "",
+                password: "",
+                cPassword: "",
+                firstName: "",
+                lastName: "",
+                phone: "",
+                userType: ""
+            }
+        })
+    }
+
+    const handleChanges = (e, fn) => {
+        e.preventDefault()
+        setFormState({
+            // ...formState,
+            // [e.target.name]: e.target.value
+            login: {
+                ...formState,
+                [e.target.name]: e.target.value
+            },
+            signup: {
+                ...formState,
+                [e.target.name]: e.target.value
+            }
+        })
+    }
 
     return (
         <nav>
@@ -63,30 +126,110 @@ const Nav = props => {
                     )
                     : (
                         <>
-                            <div className="btn" onClick={signup}>Sign Up</div>
-                            <div className="btn" onClick={login}>Log In</div>
+                            <div className="btn" onClick={displaySignup}>Sign Up</div>
+                            <div className="btn" onClick={displayLogin}>Log In</div>
                         </>
                     )
                 }
             </div>
-            {/* <Modal isOpen={modal} toggle={login} className="login">
-                <ModalHeader toggle={toggle}>Sign In</ModalHeader>
-                <ModalBody>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                </ModalBody>
-                <ModalFooter>
-                <Button color="primary" onClick={toggle}>Do Something</Button>{' '}
-                <Button color="secondary" onClick={toggle}>Cancel</Button>
-                </ModalFooter>
-            </Modal> */}
             {
                 lModal && (
-                    <div className="modal">
+                    <div className="modal l-modal">
+                        <div className="close close-login" onClick={() => setLModal(false)}>X</div>
                         <h3>Sign In</h3>
-                        <form>
-                            <input type="email" />
-                            <input type="password" />
-                        <button></button>
+                        <form onSubmit={login}>
+                            <label>Email<input 
+                                type="email" 
+                                name="email" 
+                                value={formState.login.email} 
+                                placeholder="email" 
+                                onChange={handleChanges} 
+                                required
+                            /></label>
+                            <label>Password<input 
+                                type="password" 
+                                name="password" 
+                                value={formState.login.password} 
+                                placeholder="password" 
+                                onChange={handleChanges} 
+                                required
+                            /></label>
+                        <button>Sign In</button>
+                        </form>
+                        <p onClick={() => {
+                            setLModal(false)
+                            setSModal(true)
+                        }}>Not a member?</p>
+                    </div>
+                )
+            }
+            {
+                sModal && (
+                    <div className="modal s-modal">
+                        <div className="close close-signup" onClick={() => setSModal(false)}>X</div>
+                        <h4>Sign Up</h4>
+                        <span>Fields with <sub>*</sub> are required</span>
+                        <p onClick={() => {
+                            setSModal(false)
+                            setLModal(true)
+                        }}>Already Have an account?</p>
+                        <form onSubmit={signup}>
+                            <label>Email<sub>*</sub><input 
+                                type="email" 
+                                name="email" 
+                                value={formState.signup.email} 
+                                placeholder="email" 
+                                onChange={handleChanges} 
+                                required
+                            /></label>
+                            <label>Password<sub>*</sub> (minimum 8 characters)<input 
+                                type="password" 
+                                name="password" 
+                                value={formState.signup.password} 
+                                placeholder="password" 
+                                onChange={handleChanges} 
+                                minLength="8"
+                                required
+                            /></label>
+                            <label>Confirm Password<input 
+                                type="password"
+                                name="cPassword"
+                                value={formState.signup.cPassword}
+                                placeholder="confirm password"
+                                onChange={handleChanges}
+                                required
+                            /></label>
+                            <label>First Name<sub>*</sub><input 
+                                type="text"
+                                name="firstName"
+                                value={formState.signup.firstName}
+                                placeholder="first name"
+                                onChange={handleChanges}
+                                required
+                            /></label>
+                            <label>Last Name<sub>*</sub><input 
+                                type="text"
+                                name="lastName"
+                                value={formState.signup.lastName}
+                                placeholder="last name"
+                                onChange={handleChanges}
+                                required
+                            /></label>
+                            <label>Phone Number (xxx-xxx-xxxx)<input 
+                                type="tel"
+                                name="phone"
+                                value={formState.signup.phone}
+                                placeholder="phone"
+                                onChange={handleChanges}
+                                maxLength="12"
+                                pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                            /></label>
+                            <label>User Type<sub>*</sub><select name="userType" required>
+                                <option value="Athlete">Athlete</option>
+                                <option value="Parent">Parent</option>
+                                <option value="Administrator">Administrator</option>
+                            </select></label>
+                            <button>Sign Up</button>
                         </form>
                     </div>
                 )

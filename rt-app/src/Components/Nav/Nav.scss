@@ -43,5 +43,49 @@ nav {
             cursor: pointer;
         }
     }
-    // .link
+    .modal {
+        position: fixed;
+        z-index: 10;
+        top: 33%;
+        left: 33%;
+        box-shadow: 0px 0px 30px rgba(76, 147, 230, 0.12);
+        border-radius: 8px;
+        padding: 4rem;
+        display: flex;
+        flex-direction: column;
+        sub {
+            color: #f00;
+        }
+        h3, h4 {
+            font-size: 2.4rem;
+        }
+        p {
+            text-decoration: underline;
+            cursor: pointer;
+        }
+        .close {
+            cursor: pointer;
+            align-self: flex-end;
+        }
+        .close-login {
+            color: $blue-white;
+        }
+        .close-signup {
+            color: $brand-blue;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            // label {
+            //     margin: 1rem;
+            // }
+            input {
+                margin: 1rem;
+            }
+        }
+    }
+    .l-modal {
+        background-color: $brand-blue;
+        color: $blue-white;
+    }
 }
