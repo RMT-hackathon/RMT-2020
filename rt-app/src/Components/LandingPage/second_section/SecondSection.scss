@@ -1,0 +1,22 @@
+.sec {
+  height: 640px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.textbox {
+  width: 40%;
+}
+
+.boxitems {
+  width: 60%;
+  display: flex;
+  flex-wrap: wrap;
+  height: 600px;
+}
+
+.box {
+  width: 370px;
+  height: 224px;
+}
