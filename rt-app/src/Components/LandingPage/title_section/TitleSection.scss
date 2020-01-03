@@ -1,0 +1,30 @@
+.title {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  flex-wrap: wrap;
+    h1 {
+      font-size: 6rem;
+      margin-left: 8rem;
+      margin-bottom: 8rem;
+    }
+  background-image: url("../../../img/title_back.svg");
+  background-size: cover;
+  height: 768px;
+  width: auto;
+}
+
+.parBtn {
+  margin-left: 8rem;
+    p {
+      font-size: 2rem;
+      margin-bottom: 4rem;
+    }
+    btn {
+      color: white;
+      background: $brand-blue;
+      font-size: 2rem;
+      padding: 1rem 3rem;
+    }
+}
