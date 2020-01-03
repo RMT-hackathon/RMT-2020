@@ -1,0 +1,13 @@
+.profile {
+    display: flex;
+    height: 500px;
+    .right {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+@import './Left/Left.scss';
+@import './Tabs/Tabs.scss';
+@import './Overview/Overview.scss';
+@import './Details/Details.scss';

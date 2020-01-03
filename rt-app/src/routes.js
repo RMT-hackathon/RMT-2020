@@ -12,7 +12,7 @@ import { useSession } from './hooks/useAuth';
 export const Routes = () => {
     
     const { isLoading, auth} = useSession()
-    console.log("auth", auth);
+    console.log("routes auth", auth);
     if (isLoading) {
         return (
             <div>Loading...</div>

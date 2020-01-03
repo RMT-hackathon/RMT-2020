@@ -12,16 +12,16 @@ const googleAuthProvider = new firebase.auth.GoogleAuthProvider()
 const Nav = props => {
     const { auth } = useSession()
 
-    if(auth) {
-        firebase.firestore().collection('orgs').where("admins", 'array-contains', auth.uid).get().then(res => {
-            let orgs= []
-            res.docs.forEach(doc => {
-                orgs.push({id: doc.id, ...doc.data()})
-            })
-            console.log(orgs)
-        })
+    // if(auth) {
+    //     firebase.firestore().collection('orgs').where("admins", 'array-contains', auth.uid).get().then(res => {
+    //         let orgs= []
+    //         res.docs.forEach(doc => {
+    //             orgs.push({id: doc.id, ...doc.data()})
+    //         })
+    //         console.log("orgs", orgs)
+    //     })
     
-    }
+    // }
 
     const links = [
         {
@@ -51,6 +51,7 @@ const Nav = props => {
     })
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [userType, setUserType] = useState("")
     const [loginEmail, loginSetEmail] = useState("")
     const [loginPassword, loginSetPassword] = useState("")
 
@@ -70,12 +71,14 @@ const Nav = props => {
         e.preventDefault()
         console.log("email", email);
         console.log("password", password);
+        console.log("userType", userType)
         // console.log("formState", formState);
         // if (formState.signup.password === formState.signup.cPassword.cPassword) {
             firebase.auth().createUserWithEmailAndPassword(email, password).then(res => {
                 console.log("res", res);
                 firebase.firestore().collection("users").doc(res.user.uid).set({
                     email: res.user.email,
+                    userType: userType,
                     createdAt: Date.now()
                 })
             })
@@ -130,20 +133,21 @@ const Nav = props => {
         })
     }
 
-    const handleChanges = (e, fn) => {
+    const handleChanges = e => {
         e.preventDefault()
-        setFormState({
-            ...formState,
-            // [e.target.name]: e.target.value
-            login: {
-                ...formState,
-                [e.target.name]: e.target.value
-            },
-            signup: {
-                ...formState,
-                [e.target.name]: e.target.value
-            }
-        })
+        // setFormState({
+        //     ...formState,
+        //     // [e.target.name]: e.target.value
+        //     login: {
+        //         ...formState,
+        //         [e.target.name]: e.target.value
+        //     },
+        //     signup: {
+        //         ...formState,
+        //         [e.target.name]: e.target.value
+        //     }
+        // })
+        setUserType(e.target.value)
     }
 
     return (
@@ -238,7 +242,7 @@ const Nav = props => {
                                 minLength="8"
                                 required
                             /></label>
-                            <label>Confirm Password<input 
+                            {/* <label>Confirm Password<input 
                                 type="password"
                                 name="cPassword"
                                 value={formState.signup.cPassword}
@@ -270,11 +274,10 @@ const Nav = props => {
                                 onChange={handleChanges}
                                 maxLength="12"
                                 pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-                            /></label>
-                            <label>User Type<sub>*</sub><select name="userType" required>
+                            /></label> */}
+                            <label>User Type<sub>*</sub><select name="userType" onChange={handleChanges} required>
                                 <option value="Athlete">Athlete</option>
                                 <option value="Parent">Parent</option>
-                                <option value="Administrator">Administrator</option>
                             </select></label>
                             <button>Sign Up</button>
                         </form>

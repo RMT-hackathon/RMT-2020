@@ -22,7 +22,7 @@ export default function AuthWrapper({ children }) {
             const unsubscribe = firebase.firestore().collection("users").doc(auth.uid).onSnapshot(snap => {
                 const data = snap.data()
                 setProfile(data)
-                console.log(data)
+                console.log("data", data)
             })
             return () => unsubscribe()
         }
