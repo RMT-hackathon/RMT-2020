@@ -1,21 +1,59 @@
+
+.footer {
+  background-color: $brand-blue;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+}
+
 #footLogo {
-
-  width: 867px;
+  margin:3rem 0;
+  width: auto;
   height: 124px;
-
 }
 
 
 .icon {
   width: 32px;
   height: 32px;
-  left: 665px;
-  top: 4762px;
+  margin: 10px;
 }
 
 
 .contact {
+    h1 {
+      font-size: 2.5rem;
+      font-weight: bold;
+    }
+    h3 {
+      font-size: 1.8rem;
+    }
+    p {
+      font-size: 1.4rem;
+      color: gray;
+    }
+  font: $dm-sans;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  text-align: center;
+  font-size: 2rem;
+  align-content: center;
+  justify-content: space-around;
+  background-color: white;
   width: 370px;
-  height: 224px;
+  height: 220px;
+  border-radius: 7px;
 }
 
+.footBar {
+  display: flex;
+  color: gray;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1rem;
+  width: 90%;
+}
