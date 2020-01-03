@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import Footer from './Components/Footer/Footer';
 import Nav from './Components/Nav/Nav';
@@ -6,9 +6,18 @@ import LandingPage from './Components/LandingPage/LandingPage';
 import About from './Components/About/About';
 import Profile from './Components/Profile/Profile';
 import faq from './Components/FAQ/faq';
+import { useSession } from './hooks/useAuth';
 
 
 export const Routes = () => {
+    
+    const { isLoading, auth} = useSession()
+    console.log("auth", auth);
+    if (isLoading) {
+        return (
+            <div>Loading...</div>
+        )
+    }
     return (
         <BrowserRouter>
             <Nav />

@@ -1,5 +1,6 @@
 nav {
-    position: sticky;
+    // position: sticky;
+    position: fixed;
     display: flex;
     flex-direction: row;
     width: 100%;
@@ -87,5 +88,8 @@ nav {
     .l-modal {
         background-color: $brand-blue;
         color: $blue-white;
+    }
+    .s-modal {
+        background-color: $white;
     }
 }

@@ -2,11 +2,27 @@ import React, { useState, useEffect } from 'react';
 // import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'react-strap';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import firebase from 'firebase';
 
 import footer_logo from '../../img/footer_logo.svg'
+import { useSession } from '../../hooks/useAuth';
+
+const googleAuthProvider = new firebase.auth.GoogleAuthProvider()
 
 const Nav = props => {
+    const { auth } = useSession()
+
+    if(auth) {
+        firebase.firestore().collection('orgs').where("admins", 'array-contains', auth.uid).get().then(res => {
+            let orgs= []
+            res.docs.forEach(doc => {
+                orgs.push({id: doc.id, ...doc.data()})
+            })
+            console.log(orgs)
+        })
     
+    }
+
     const links = [
         {
             name: "About",
@@ -33,21 +49,36 @@ const Nav = props => {
             userType: ""
         }
     })
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    const [loginEmail, loginSetEmail] = useState("")
+    const [loginPassword, loginSetPassword] = useState("")
 
-    const [loggedIn, setLoggedIn] = useState(false);
+    // const [loggedIn, setLoggedIn] = useState(false);
     const [lModal, setLModal] = useState(false);
     const [sModal, setSModal] = useState(false);
 
     const logout = () => {
-        setLoggedIn(false)
+        // setLoggedIn(false)
+        firebase.auth().signOut()
     }
     const displaySignup = () => {
         setLModal(false)
         setSModal(true)
     }
-    const signup = () => {
-        if (formState.signup.password === formState.signup.cPassword.cPassword) {
-
+    const signup = e => {
+        e.preventDefault()
+        console.log("email", email);
+        console.log("password", password);
+        // console.log("formState", formState);
+        // if (formState.signup.password === formState.signup.cPassword.cPassword) {
+            firebase.auth().createUserWithEmailAndPassword(email, password).then(res => {
+                console.log("res", res);
+                firebase.firestore().collection("users").doc(res.user.uid).set({
+                    email: res.user.email,
+                    createdAt: Date.now()
+                })
+            })
             // axios.post(`url`, formState.signup)
             setFormState({
                 login: {
@@ -64,17 +95,24 @@ const Nav = props => {
                     userType: ""
                 }
             })
-        } else {
-            return (<><p>Passwords do not match</p></>)
-        }
+        // } else {
+        //     return (<><p>Passwords do not match</p></>)
+        // }
     }
     const displayLogin = () => {
         setSModal(false)
         setLModal(true)
     }
-    const login = () => {
+    const login = e => {
+        e.preventDefault()
         // setLoggedIn(true)
         // axios.post(`url`, formState.login)
+        firebase.auth().signInWithEmailAndPassword(loginEmail, loginPassword).then(res => {
+            console.log("login res", res);
+            firebase.firestore().collection("users").doc(res.user.uid).update({
+                lastLogin: Date.now()
+            })
+        })
         setFormState({
             login: {
                 email: "",
@@ -95,7 +133,7 @@ const Nav = props => {
     const handleChanges = (e, fn) => {
         e.preventDefault()
         setFormState({
-            // ...formState,
+            ...formState,
             // [e.target.name]: e.target.value
             login: {
                 ...formState,
@@ -121,7 +159,7 @@ const Nav = props => {
                     return <Link key={l.name} to={l.path} className="link">{l.name}</Link>
                 })}
                 {
-                    loggedIn ? (
+                    auth ? (
                         <div className="btn" onClick={logout}>Logout</div> 
                     )
                     : (
@@ -141,17 +179,21 @@ const Nav = props => {
                             <label>Email<input 
                                 type="email" 
                                 name="email" 
-                                value={formState.login.email} 
+                                // value={formState.login.email} 
+                                value={loginEmail} 
                                 placeholder="email" 
-                                onChange={handleChanges} 
+                                // onChange={handleChanges} 
+                                onChange={e => loginSetEmail(e.target.value)} 
                                 required
                             /></label>
                             <label>Password<input 
                                 type="password" 
                                 name="password" 
-                                value={formState.login.password} 
+                                // value={formState.login.password} 
+                                value={loginPassword} 
                                 placeholder="password" 
-                                onChange={handleChanges} 
+                                // onChange={handleChanges} 
+                                onChange={e => loginSetPassword(e.target.value)} 
                                 required
                             /></label>
                         <button>Sign In</button>
@@ -177,17 +219,22 @@ const Nav = props => {
                             <label>Email<sub>*</sub><input 
                                 type="email" 
                                 name="email" 
-                                value={formState.signup.email} 
+                                // value={formState.signup.email} 
+                                value={email} 
                                 placeholder="email" 
-                                onChange={handleChanges} 
+                                // onChange={handleChanges} 
+                                onChange={e => setEmail(e.target.value)} 
+
                                 required
                             /></label>
                             <label>Password<sub>*</sub> (minimum 8 characters)<input 
                                 type="password" 
                                 name="password" 
-                                value={formState.signup.password} 
+                                // value={formState.signup.password} 
+                                value={password} 
                                 placeholder="password" 
-                                onChange={handleChanges} 
+                                // onChange={handleChanges} 
+                                onChange={e => setPassword(e.target.value)} 
                                 minLength="8"
                                 required
                             /></label>
