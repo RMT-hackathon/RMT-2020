@@ -1,8 +1,10 @@
 .sec {
-  height: 640px;
   display: flex;
   align-items: center;
   justify-content: space-around;
+  @media (max-width: $mobile) {
+    flex-direction: column;
+  }
 }
 
 .textbox {
@@ -30,7 +32,10 @@
   align-content: center;
   justify-content: center;
   flex-wrap: wrap;
-  height: 600px;
+  //height: 600px;
+  @media (max-width: $mobile) {
+    flex-direction: column;
+  }
 }
 
 .box {
