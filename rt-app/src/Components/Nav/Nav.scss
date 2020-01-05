@@ -8,11 +8,15 @@ nav {
     align-items: center;
     background-color: $brand-blue;
     font-size: 1.6rem;
+    @media (max-width: $mobile) {
+        flex-direction: column;
+        position: inherit;
+    }
     .profile-img {
-        display: hidden;
+        display: none;
         width: 5rem;
         height: 5rem;
-        @media (min-width: $mobile) {
+        @media (max-width: $mobile) {
             display: block;
         }
     }
@@ -20,6 +24,11 @@ nav {
         margin: 1.5rem 2.5rem;
         height: 50%;
         width: 50%;
+        @media (max-width: $mobile) {
+            width: 100%;
+            height: auto;
+            margin: 1.5rem 0;
+        }
     }
     .right {
         display: flex;
@@ -31,9 +40,9 @@ nav {
             color: $blue-white;
             text-decoration: none;
             margin: 0 1.5rem;
-            @media (min-width: $mobile) {
-                display: hidden;
-            }
+            //@media (max-width: $mobile) {
+            //    display: none;
+            //}
         }
         .btn {
             background-color: $blue-white;

@@ -9,7 +9,7 @@ const Third = () => {
                 <button>Explore</button>
             </div>
             <div className={'baseball'}>
-                <img src={baseball}/>
+                <img src={baseball} alt={'baseball'}/>
             </div>
         </div>
     )

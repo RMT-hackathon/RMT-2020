@@ -14,22 +14,22 @@ const Second = () => {
             </div>
             <div className={'boxItems'}>
                 <div className={'box'} id={'layouts'}>
-                    <img src={layouts}/>
+                    <img src={layouts} alt={'layout icon'}/>
                     <h2>Layouts</h2>
                     <p>Quidam officiis similique sea ei, vel tollit indoctum efficiendi tantas platonem. </p>
                 </div>
                 <div className={'box'} id={'awards'}>
-                    <img src={awards}/>
+                    <img src={awards} alt={'award icon'}/>
                     <h2>Awards</h2>
                     <p>Deseruisse definitionem his et, an has veri integre abhorreant, nam alii epicurei.</p>
                 </div>
                 <div className={'box'} id={'coffee'}>
-                    <img src={coffee}/>
+                    <img src={coffee} alt={'coffee icon'}/>
                     <h2>Cups of Coffee</h2>
                     <p>Ea eos essent ornatus percipit, mea an persecuti pertinacia partiendo eu ius.</p>
                 </div>
                 <div className={'box'} id={'projects'}>
-                    <img src={projects}/>
+                    <img src={projects} alt={'project icon'}/>
                     <h2>Projects</h2>
                     <p>Mea iisque mentitum signiferumque te, sed commune erroribus scripserit sea.</p>
                 </div>
