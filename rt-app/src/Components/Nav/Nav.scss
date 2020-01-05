@@ -12,6 +12,11 @@ nav {
         flex-direction: column;
         position: inherit;
     }
+    .left {
+        @media (max-width: $mobile) {
+            margin-bottom: 2rem;
+        }
+    }
     .profile-img {
         display: none;
         width: 5rem;
@@ -35,6 +40,9 @@ nav {
         flex-direction: row;
         justify-content: space-around;
         align-items: center;
+        @media (max-width: $mobile) {
+            margin-bottom: 2rem;
+        }
 
         a {
             color: $blue-white;
