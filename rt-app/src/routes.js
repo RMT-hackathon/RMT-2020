@@ -7,6 +7,10 @@ import About from './Components/About/About';
 import Profile from './Components/Profile/Profile';
 import faq from './Components/FAQ/faq';
 import { useSession } from './hooks/useAuth';
+import Athlete from "./Components/LandingPage/Athlete/Athlete";
+import Coach from "./Components/LandingPage/Coach/Coach";
+import Trainer from "./Components/LandingPage/Trainer/Trainer";
+import Therapist from "./Components/LandingPage/Therapist/Therapist";
 
 
 export const Routes = () => {
@@ -22,6 +26,10 @@ export const Routes = () => {
         <BrowserRouter>
             <Nav />
             <Route exact path="/" component={LandingPage} />
+            <Route exact path={"/athlete"} component={Athlete}/>
+            <Route exact path={"/coach"} component={Coach}/>
+            <Route exact path={"/trainer"} component={Trainer}/>
+            <Route exact path={"/therapist"} component={Therapist}/>
             <Route exact path="/about" component={About} />
             <Route exact path="/profile" component={Profile} />
             <Route exact path="/faq" component={faq} />
