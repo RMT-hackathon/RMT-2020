@@ -1,6 +1,9 @@
 import React from 'react';
 import Athlete from "./Athlete/Athlete";
-import Second from "./Therapist/SecondSection";
+import Coach from "./Coach/Coach";
+import Therapist from "./Therapist/Therapist";
+import Trainer from "./Trainer/Trainer";
+import {Link} from "react-router-dom";
 
 const LandingPage = () => {
     return (
@@ -10,19 +13,22 @@ const LandingPage = () => {
             </div>
             <div className={"classBoxes"}>
                 <div className={"optionLeft"}>
-                    <div className={"athlete"}>
-                        Athlete
+                    <div className={"org"}>
+                        <Link to={"/org"}>
+                            <h1>Athletic Organization</h1>
+                            <p>Blurb</p>
+                        </Link>
                     </div>
                     <div className={"coach"}>
-                        Coach
+                        <Link to={"/coach"}>Coach</Link>
                     </div>
                 </div>
                 <div className={"optionRight"}>
-                    <div className={"trainer"}>
-                        Trainer
+                    <div className={"athlete"}>
+                        <Link to={"/athlete"}>Athlete</Link>
                     </div>
-                    <div className={"therapist"}>
-                        Therapist
+                    <div className={"trainer"}>
+                        <Link to={"/trainer"}>Personal Trainer</Link>
                     </div>
                 </div>
             </div>

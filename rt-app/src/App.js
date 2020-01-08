@@ -6,6 +6,6 @@ const App = () => (
     <AuthWrapper>
         <Routes />
     </AuthWrapper>
-)
+);
 
 export default App;
